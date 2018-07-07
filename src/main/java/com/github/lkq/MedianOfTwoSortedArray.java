@@ -29,38 +29,38 @@ public class MedianOfTwoSortedArray {
         System.out.println(solution.findMedianSortedArrays(new int[]{1, 2}, new int[]{3}));
         System.out.println(solution.findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}));
     }
-}
 
-class Solution {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int idx1 = 0;
-        int idx2 = 0;
-        int len1 = nums1.length;
-        int len2 = nums2.length;
-        int totalLen = len1 + len2;
-        int midLen = totalLen / 2 + 1;
+    static class Solution {
+        public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+            int idx1 = 0;
+            int idx2 = 0;
+            int len1 = nums1.length;
+            int len2 = nums2.length;
+            int totalLen = len1 + len2;
+            int midLen = totalLen / 2 + 1;
 
-        int min = Integer.MIN_VALUE;
-        int prevMin = min;
+            int min = Integer.MIN_VALUE;
+            int prevMin = min;
 
-        int num1, num2;
-        while (idx1 + idx2 < midLen) {
+            int num1, num2;
+            while (idx1 + idx2 < midLen) {
 
-            num1 = idx1 < len1 ? nums1[idx1] : Integer.MAX_VALUE;
-            num2 = idx2 < len2 ? nums2[idx2] : Integer.MAX_VALUE;
-            if (idx1 < len1 && num1 < num2) {
-                prevMin = min;
-                min = nums1[idx1++];
-            } else if (idx2 < len2){
-                prevMin = min;
-                min = nums2[idx2++];
+                num1 = idx1 < len1 ? nums1[idx1] : Integer.MAX_VALUE;
+                num2 = idx2 < len2 ? nums2[idx2] : Integer.MAX_VALUE;
+                if (idx1 < len1 && num1 < num2) {
+                    prevMin = min;
+                    min = nums1[idx1++];
+                } else if (idx2 < len2){
+                    prevMin = min;
+                    min = nums2[idx2++];
+                }
             }
-        }
 
-        if (totalLen % 2 == 1 || prevMin == Integer.MIN_VALUE) {
-            return min;
-        } else {
-            return (prevMin + min) / 2.0;
+            if (totalLen % 2 == 1 || prevMin == Integer.MIN_VALUE) {
+                return min;
+            } else {
+                return (prevMin + min) / 2.0;
+            }
         }
     }
 }
